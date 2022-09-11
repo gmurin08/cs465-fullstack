@@ -6,7 +6,7 @@
     "start": "node ./bin/www"
   },
   "seedgoose": {
-    "modelBaseDirectory": "app_server/models",
+    "modelBaseDirectory": "app_api/models",
     "models": [
       "*.js",
       "!db.js"
