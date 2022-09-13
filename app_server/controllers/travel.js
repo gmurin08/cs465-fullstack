@@ -16,6 +16,7 @@ const renderTravelList = (req, res, responseBody)=>{
             message= 'No trips exist in our database!';
         }
     }
+        
     res.render('travel',
         {
             title: pageTitle,
@@ -25,9 +26,10 @@ const renderTravelList = (req, res, responseBody)=>{
     );
 };
 
+
 /* GET travel view */
 const travelList = (req, res) => {
-    
+
     const path = '/api/trips';
     const requestOptions = {
         url: `${apiOptions.server}${path}`,
@@ -35,7 +37,7 @@ const travelList = (req, res) => {
         json:{},
     };
 
-    console.info('>> travelController.travelList calling' + requestOptions.url);
+    console.info('>> travelController.travelList calling ' + requestOptions.url);
 
     request(
         requestOptions,
@@ -47,5 +49,6 @@ const travelList = (req, res) => {
         }
     )
 };
+
 
 module.exports={travelList}
