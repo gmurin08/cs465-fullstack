@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
-const Model = mongoose.model('trips');
+const model = mongoose.model('trips');
 
 //GET '/trips' -> lists all trips
 const tripsList = async(req, res) =>{
-    Model
+    model
         .find({}) //empty filter for all
         .exec((err,trips)=>{
             if(!trips){
@@ -19,7 +19,7 @@ const tripsList = async(req, res) =>{
 
 //GET '/trips/:tripCode' -> returns a single trip
 const tripsFindByCode = async(req,res) =>{
-    Model
+    model
         .find({ 'code':req.params.tripCode })
         .exec((err,trip)=>{
             if (!trip){
@@ -33,4 +33,32 @@ const tripsFindByCode = async(req,res) =>{
         });
 };
 
-module.exports={tripsList,tripsFindByCode};
+const tripsAddTrip = async (req,res) => {
+    model
+    .create({
+        code: req.body.code,
+        name: req.body.name,
+        length: req.body.length,
+        start: req.body.start,
+        resort: req.body.resort,
+        perPerson: req.body.perPerson,
+        image: req.body.image,
+        description: req.body.description,
+    },
+    (err, trip) => {
+        if(err){
+            return res
+                .status(400) //bad request
+                .json(err)
+        }else {
+            return res
+                .status(201).json(trip)
+        }
+    });
+}
+
+module.exports={
+    tripsList,
+    tripsFindByCode,
+    tripsAddTrip
+};

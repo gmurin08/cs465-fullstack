@@ -11,7 +11,6 @@ export class TripCardComponent implements OnInit {
   '../trip-listing/trip-listing.component.html'
   */
   @Input('trip') trip: any;
-
   constructor() { }
 
   ngOnInit() {

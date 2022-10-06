@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from "@angular/router";
 /* Previously used to render static data from file:
 import {trips} from '../data/trips'; 
 */
@@ -18,7 +19,15 @@ export class TripListingComponent implements OnInit {
   trips: Trip[];
   message: string;
   
-  constructor(private tripDataService: TripDataService) { }
+  constructor(
+    private tripDataService: TripDataService,
+    private router: Router
+    ) { }
+
+  private addTrip(): void {
+    console.log('Inside TripListingCompontent#addTrip');
+    this.router.navigate(['add-trip']);
+  }
 
   //component version of getTrips that calls the service object version
   private getTrips(): void{
