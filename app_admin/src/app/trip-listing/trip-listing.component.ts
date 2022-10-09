@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
+ 
 /* Previously used to render static data from file:
 import {trips} from '../data/trips'; 
 */
