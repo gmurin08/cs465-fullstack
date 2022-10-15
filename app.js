@@ -34,6 +34,15 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
 
+
+//Catch unauthorized error and create 401
+app.use(function(err,req,res,next){
+  if(err.name === 'UnauthorizedError'){
+    res.status(401)
+    .json({'message':err.name +':' + err.message})
+  }
+})
+
 // allow CORS
 app.use('/api', (req,res,next)=>{
   res.header('Access-Control-Allow-Origin', 'http://localhost:4200');

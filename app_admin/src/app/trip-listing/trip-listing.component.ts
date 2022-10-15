@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
- 
+import {AuthenticationService} from '../services/authentication'
+
 /* Previously used to render static data from file:
 import {trips} from '../data/trips'; 
 */
@@ -22,6 +23,7 @@ export class TripListingComponent implements OnInit {
   
   constructor(
     private tripDataService: TripDataService,
+    private authenticationService: AuthenticationService,
     private router: Router
     ) { }
 
@@ -39,6 +41,10 @@ export class TripListingComponent implements OnInit {
       this.message = foundTrips.length > 0 ? '' : 'No trips found';
       this.trips = foundTrips;
     });
+  }
+
+  public isLoggedIn(): boolean{
+    return this.authenticationService.isLoggedIn();
   }
 
   ngOnInit(): void {
