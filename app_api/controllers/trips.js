@@ -97,11 +97,20 @@ const tripsUpdateTrip = async (req,res) => {
 
 const tripsDeleteTrip = async (req,res)=>{
     getUser(req,res, (req, res)=>{
-    Trip.findOneAndRemove({ 'code':req.params.tripCode },
-    (err)=>{
-        if(err){
-            res.status(404).send("cannot delete")
+    Trip.findOneAndRemove({ 'code':req.params.tripCode }).then(trip=>{
+        if(!trip){
+            return res.status(404).send({
+                message:"Trip not found with code" + req.params.tripCode
+            });
         }
+        res.send(trip);
+    }).catch(err =>{
+        if(err.kind === 'ObjectId'){
+            return res.status(404).send({
+                message:"Trip not found with code " + req.params.tripCode
+            })
+        }
+        return res.status(500).json(err)
     });
 });
 }
